@@ -1,11 +1,17 @@
 package com.example.mycallerapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +45,103 @@ public class MyContactRecyclerAdapter extends RecyclerView.Adapter<MyContactRecy
         holder.tv_idContact.setText(""+c.getId());
         holder.tv_nomContact.setText(""+c.getNom());
         holder.tv_numtelContact.setText(""+c.getNumtel());
+        holder.imgview_call_Contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tel=c.getNumtel();
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);  // Use ACTION_DIAL to open dialer
+                callIntent.setData(Uri.parse("tel:" + tel));
+                con.startActivity(callIntent);
+            }
+        });
+        holder.imgview_delete_Contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(con);
+                alertDialog.setTitle("Supprimer le contact");
+                alertDialog.setMessage("Êtes-vous sûr de vouloir supprimer ce contact ?");
+                alertDialog.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        data.remove(position);
+                        Toast.makeText(con, "Contact supprimé", Toast.LENGTH_SHORT).show();
+                        dialogInterface.dismiss();
+                        notifyDataSetChanged();
+                    }
+                });
+                alertDialog.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                alertDialog.show();
+            }
+        });
+
+        holder.imgview_edit_Contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder editDialogBuilder = new AlertDialog.Builder(con);
+                LayoutInflater inflater = LayoutInflater.from(con);
+                View editView = inflater.inflate(R.layout.edit_contact_dialog, null);
+                editDialogBuilder.setView(editView);
+
+                EditText etEditName = editView.findViewById(R.id.et_edit_name);
+                EditText etEditPhone = editView.findViewById(R.id.et_edit_phone);
+
+                etEditName.setText(c.getNom());
+                etEditPhone.setText(c.getNumtel());
+
+                editDialogBuilder.setTitle("Modifier le contact");
+                editDialogBuilder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        AlertDialog.Builder confirmDialog = new AlertDialog.Builder(con);
+                        confirmDialog.setTitle("Confirmer la modification");
+                        confirmDialog.setMessage("Êtes-vous sûr de vouloir enregistrer les modifications ?");
+                        confirmDialog.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                String newName = etEditName.getText().toString();
+                                String newPhone = etEditPhone.getText().toString();
+
+                                c.setNom(newName);
+                                c.setNumtel(newPhone);
+
+                                notifyDataSetChanged();
+                                Toast.makeText(con, "Contact mis à jour", Toast.LENGTH_SHORT).show();
+                                dialogInterface.dismiss();
+                            }
+                        });
+                        confirmDialog.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+
+                        confirmDialog.show();
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                editDialogBuilder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                editDialogBuilder.show();
+            }
+        });
+
+
     }
 
     @Override

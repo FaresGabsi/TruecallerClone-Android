@@ -15,7 +15,7 @@ public class Acceuil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceuil);
-        tusername=findViewById(R.id.tv_user);
+        tusername=findViewById(R.id.tv_acceuil);
         btnajout=findViewById(R.id.btn_ajout);
         btnaffiche=findViewById(R.id.btn_affiche);
         Intent x=this.getIntent();
@@ -26,6 +26,13 @@ public class Acceuil extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(Acceuil.this,Affiche.class);
+                Acceuil.this.startActivity(i);
+            }
+        });
+        btnajout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(Acceuil.this,Ajout.class);
                 Acceuil.this.startActivity(i);
             }
         });
