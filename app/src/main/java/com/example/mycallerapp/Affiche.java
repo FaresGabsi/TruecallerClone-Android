@@ -28,23 +28,26 @@ public class Affiche extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-        data.add(new Contact(1, "Fares", "22509369"));
-        data.add(new Contact(2, "Yosra", "22509369"));
-        data.add(new Contact(2, "Wassim", "22509369"));
-        data.add(new Contact(1, "Fares", "22509369"));
-        data.add(new Contact(2, "Yosra", "22509369"));
-        data.add(new Contact(2, "Wassim", "22509369"));
-        data.add(new Contact(1, "Fares", "22509369"));
-        data.add(new Contact(2, "Yosra", "22509369"));
-        data.add(new Contact(2, "Wassim", "22509369"));
-        data.add(new Contact(1, "Fares", "22509369"));
-        data.add(new Contact(2, "Yosra", "22509369"));
-        data.add(new Contact(2, "Wassim", "22509369"));
+        ContactManager contactManager=new ContactManager(Affiche.this);
+        contactManager.ouvrir();
+        data=contactManager.getAllContacts();
+//        data.add(new Contact(1, "Fares", "22509369"));
+//        data.add(new Contact(2, "Yosra", "22509369"));
+//        data.add(new Contact(2, "Wassim", "22509369"));
+//        data.add(new Contact(1, "Fares", "22509369"));
+//        data.add(new Contact(2, "Yosra", "22509369"));
+//        data.add(new Contact(2, "Wassim", "22509369"));
+//        data.add(new Contact(1, "Fares", "22509369"));
+//        data.add(new Contact(2, "Yosra", "22509369"));
+//        data.add(new Contact(2, "Wassim", "22509369"));
+//        data.add(new Contact(1, "Fares", "22509369"));
+//        data.add(new Contact(2, "Yosra", "22509369"));
+//        data.add(new Contact(2, "Wassim", "22509369"));
 
         MyContactRecyclerAdapter ad = new MyContactRecyclerAdapter(Affiche.this, data);
         LinearLayoutManager manager = new LinearLayoutManager(Affiche.this, LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(manager);
         rv.setAdapter(ad);
+        contactManager.fermer();
     }
 }

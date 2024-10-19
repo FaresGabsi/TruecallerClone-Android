@@ -63,10 +63,18 @@ public class MyContactRecyclerAdapter extends RecyclerView.Adapter<MyContactRecy
                 alertDialog.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        data.remove(position);
+                        int id = data.get(position).getId(); // Use the correct method to get the contact ID
+                        ContactManager manager = new ContactManager(con);
+                        manager.ouvrir();
+                        manager.supprimer(id); // Delete contact from database
+
+                        // Clear current data and fetch updated contact list
+                        data.clear();
+                        data.addAll(manager.getAllContacts()); // Refresh contacts
                         Toast.makeText(con, "Contact supprimé", Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged(); // Notify adapter of data changes
+                        manager.fermer(); // Close the database
                         dialogInterface.dismiss();
-                        notifyDataSetChanged();
                     }
                 });
                 alertDialog.setNegativeButton("Non", new DialogInterface.OnClickListener() {
@@ -106,10 +114,17 @@ public class MyContactRecyclerAdapter extends RecyclerView.Adapter<MyContactRecy
                         confirmDialog.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
                                 String newName = etEditName.getText().toString();
                                 String newPhone = etEditPhone.getText().toString();
 
+                                // Update the contact in the database
+                                ContactManager manager = new ContactManager(con);
+                                manager.ouvrir();
+                                int contactId = c.getId(); // Assuming c has a method to get the ID
+                                manager.modifier(contactId, newName, newPhone); // Update contact in the database
+                                manager.fermer();
+
+                                // Update the contact in your local data
                                 c.setNom(newName);
                                 c.setNumtel(newPhone);
 

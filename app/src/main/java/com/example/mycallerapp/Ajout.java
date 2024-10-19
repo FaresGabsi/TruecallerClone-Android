@@ -1,11 +1,13 @@
 package com.example.mycallerapp;
 
+import android.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -56,6 +58,32 @@ public class Ajout extends AppCompatActivity {
 
             }
         });
+        btn_ajouter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ContactManager manager = new ContactManager(Ajout.this);
+                manager.ouvrir();
+
+                String nom = ed_nom.getText().toString().trim();
+                String tel = ed_numTel.getText().toString().trim();
+
+                // Check if the contact already exists in the database
+                if (manager.contactExists(nom, tel)) {
+                    // Show AlertDialog if contact already exists
+                    new AlertDialog.Builder(Ajout.this)
+                            .setTitle("Contact Existe")
+                            .setMessage("Un contact avec ce nom et ce numéro existe déjà.")
+                            .setPositiveButton(android.R.string.ok, null)
+                            .show();
+                } else {
+                    long a = manager.ajout(nom, tel);
+                    Toast.makeText(Ajout.this, "Contact ajouté avec succès", Toast.LENGTH_SHORT).show();
+                }
+
+                manager.fermer();
+            }
+        });
+
 
     }
 }

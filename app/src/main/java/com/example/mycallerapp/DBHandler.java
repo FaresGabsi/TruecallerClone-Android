@@ -20,7 +20,7 @@ public class DBHandler extends SQLiteOpenHelper {
         String query= "CREATE TABLE "+ table_contact+" ("
                 + col_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + col_nom + " TEXT not null, "
-                + col_num + " INTEGER not null )";
+                + col_num + " TEXT not null )";
 
         db.execSQL(query);
     }
