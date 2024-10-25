@@ -22,11 +22,11 @@ import java.util.ArrayList;
 public class MyContactRecyclerAdapter extends RecyclerView.Adapter<MyContactRecyclerAdapter.MyViewHolder> {
     Context con;
     ArrayList<Contact> data;
-
     public MyContactRecyclerAdapter(Context con, ArrayList<Contact> data) {
         this.con = con;
         this.data = data;
     }
+
 
     @NonNull
     @NotNull
@@ -49,7 +49,7 @@ public class MyContactRecyclerAdapter extends RecyclerView.Adapter<MyContactRecy
             @Override
             public void onClick(View view) {
                 String tel=c.getNumtel();
-                Intent callIntent = new Intent(Intent.ACTION_DIAL);  // Use ACTION_DIAL to open dialer
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:" + tel));
                 con.startActivity(callIntent);
             }

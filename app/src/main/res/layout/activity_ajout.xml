@@ -6,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".Affiche">
+        tools:context=".Affiche"
+        android:background="@drawable/bg">
 
     <!-- Header with Back Button and Title -->
     <LinearLayout
@@ -93,5 +94,14 @@
                 android:text="Ajouter"
                 android:layout_marginStart="8dp"/>
     </LinearLayout>
-
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="438dp" android:id="@+id/view"/>
+    <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Logo"/>
 </LinearLayout>

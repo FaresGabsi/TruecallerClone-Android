@@ -27,11 +27,11 @@ public class ContactManager {
         return a;
     }
 
-    public boolean contactExists(String nom, String tel) {
+    public boolean contactExists( String tel) {
         Cursor cursor = db.query(DBHandler.table_contact,
                 new String[]{DBHandler.col_id},  // Columns to select
-                DBHandler.col_nom + "=? AND " + DBHandler.col_num + "=?",
-                new String[]{nom, tel},           // Selection args
+                    DBHandler.col_num + "=?",
+                new String[]{tel},           // Selection args
                 null, null, null);
 
         boolean exists = (cursor.getCount() > 0);

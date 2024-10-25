@@ -5,20 +5,58 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="20dp"
-        android:background="#F5F5F5">
+        android:background="@drawable/bg">
 
     <!-- Title -->
-    <TextView
-            android:id="@+id/tv_acceuil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Accueil"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="#6200EE"
-            android:layout_gravity="center_horizontal"
-            android:padding="24dp"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:orientation="horizontal"
+            android:gravity="center">
 
+        <!-- ImageView for logout logo -->
+        <TextView
+                android:id="@+id/tv_acceuil"
+                android:layout_width="308dp"
+                android:layout_height="wrap_content"
+                android:text="Accueil"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#6200EE"
+                android:layout_gravity="center_horizontal"
+                android:padding="24dp"/>
+        <!-- Space between the image and TextView -->
+
+        <!-- View to create space between ImageView and TextView -->
+        <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        <ImageView
+                android:id="@+id/img_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_logout_24"
+                android:contentDescription="Logout"
+                android:layout_marginEnd="16dp"/> <!-- This view will take up the remaining space -->
+
+        <!-- TextView for welcome message -->
+    </LinearLayout>
+
+    <EditText
+            android:id="@+id/et_search_Acceuil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search"
+            android:iconifiedByDefault="false"
+            android:layout_marginBottom="8dp" android:hint="Search..."/>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_contact"
+            android:layout_width="match_parent"
+            android:layout_height="445dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:clipToPadding="false"/>
     <!-- Add Button -->
     <Button
             android:id="@+id/btn_ajout"
@@ -34,17 +72,23 @@
             android:elevation="4dp"
             android:background="@drawable/rounded_button"/>
 
-    <!-- Display Button -->
-    <Button
-            android:id="@+id/btn_affiche"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Affiche"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="#03DAC5"
-            android:textColor="#FFFFFF"
-            android:padding="12dp"
-            android:elevation="4dp"
-            android:background="@drawable/rounded_button"/>
-
+<!--    &lt;!&ndash; Display Button &ndash;&gt;-->
+<!--    <Button-->
+<!--            android:id="@+id/btn_affiche"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Affiche"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:backgroundTint="#03DAC5"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:padding="12dp"-->
+<!--            android:elevation="4dp"-->
+<!--            android:background="@drawable/rounded_button"/>-->
+    <ImageView
+            android:layout_width="75dp"
+            android:layout_height="70dp"
+            android:src="@drawable/logo"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Logo"/>
 </LinearLayout>

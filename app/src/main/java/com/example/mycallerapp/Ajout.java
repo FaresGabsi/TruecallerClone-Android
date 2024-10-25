@@ -1,6 +1,7 @@
 package com.example.mycallerapp;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -29,7 +30,8 @@ public class Ajout extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent i=new Intent(Ajout.this,Acceuil.class);
+                Ajout.this.startActivity(i);
             }
         });
 
@@ -68,11 +70,11 @@ public class Ajout extends AppCompatActivity {
                 String tel = ed_numTel.getText().toString().trim();
 
                 // Check if the contact already exists in the database
-                if (manager.contactExists(nom, tel)) {
+                if (manager.contactExists(tel)) {
                     // Show AlertDialog if contact already exists
                     new AlertDialog.Builder(Ajout.this)
                             .setTitle("Contact Existe")
-                            .setMessage("Un contact avec ce nom et ce numéro existe déjà.")
+                            .setMessage("Un contact ce numéro existe déjà.")
                             .setPositiveButton(android.R.string.ok, null)
                             .show();
                 } else {

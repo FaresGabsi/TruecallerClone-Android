@@ -7,15 +7,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".MainActivity">
-
+        tools:context=".MainActivity"
+        android:background="@drawable/bg">
+    <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"
+    android:layout_gravity="center"
+    android:layout_marginBottom="16dp"
+    android:contentDescription="Logo"/>
     <!-- Plain text saying Hello -->
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello"
-            android:textSize="24sp"
-            android:layout_gravity="center" android:id="@+id/title"/>
 
     <!-- Name input field -->
     <EditText
@@ -38,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Stay connected"
-            android:layout_marginTop="8dp" android:id="@+id/Checkbox"/>
+            android:layout_marginTop="8dp" android:id="@+id/cb_stay_auth"/>
 
     <!-- Buttons for Validate and Reset -->
     <LinearLayout
@@ -61,5 +62,32 @@
                 android:text="Reset"
                 android:layout_weight="1" android:id="@+id/btnquitter_auth"/>
     </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
 
+        <!-- Empty View to take up space on the left -->
+        <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        <!-- Hypertext link -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="vous n'avez pas un compte? inscrivez vous"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/tv_singup_Main"/>
+
+        <!-- Empty View to take up space on the right -->
+        <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+    </LinearLayout>
 </LinearLayout>
